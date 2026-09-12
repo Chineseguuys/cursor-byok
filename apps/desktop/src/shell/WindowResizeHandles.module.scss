@@ -1,0 +1,73 @@
+$edge: 6px;
+$corner: 12px;
+
+.handle {
+  position: fixed;
+  z-index: 21000; /* above the ad layer (20000) and message layer (16000) */
+  -webkit-app-region: no-drag;
+  touch-action: none;
+}
+
+.north {
+  top: 0;
+  right: 0;
+  left: 0;
+  height: $edge;
+  cursor: ns-resize;
+}
+
+.south {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: $edge;
+  cursor: ns-resize;
+}
+
+.west {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: $edge;
+  cursor: ew-resize;
+}
+
+.east {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $edge;
+  cursor: ew-resize;
+}
+
+.northWest {
+  top: 0;
+  left: 0;
+  width: $corner;
+  height: $corner;
+  cursor: nwse-resize;
+}
+
+.northEast {
+  top: 0;
+  right: 0;
+  width: $corner;
+  height: $corner;
+  cursor: nesw-resize;
+}
+
+.southWest {
+  bottom: 0;
+  left: 0;
+  width: $corner;
+  height: $corner;
+  cursor: nesw-resize;
+}
+
+.southEast {
+  right: 0;
+  bottom: 0;
+  width: $corner;
+  height: $corner;
+  cursor: nwse-resize;
+}
