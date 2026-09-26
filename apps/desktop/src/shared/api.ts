@@ -1,5 +1,5 @@
 import type { AdRuntime } from "../shell/ads/types";
-import type { Locale } from "../i18n/runtime";
+import type { CommitPromptLocale, Locale } from "../i18n/runtime";
 
 export type ModelType = "openai" | "anthropic";
 
@@ -114,7 +114,6 @@ export interface PortSettings {
 }
 
 export interface StatisticsStorage {
-  bytes: number;
   call_count: number;
   trace_count: number;
 }
@@ -154,11 +153,18 @@ export interface DesktopSettings {
 export interface CommitSettings {
   model_id: string;
   prompt: string;
-  prompt_locale: Locale;
+  prompt_locale: CommitPromptLocale;
 }
 
 export interface CommitSettingsView extends CommitSettings {
   default_prompt: string;
+}
+
+export interface TokenPricingSettings {
+  input_per_million: number;
+  output_per_million: number;
+  cache_read_per_million: number;
+  cache_write_per_million: number;
 }
 
 export type PluginRuntimeState = "uninitialized" | "initializing" | "ready" | "failed" | "unsupported";
@@ -545,4 +551,6 @@ export const api = {
   setDesktopSettings: (settings: DesktopSettings) => request<DesktopSettings>("/settings/desktop", { method: "PUT", body: JSON.stringify(settings) }),
   commitSettings: (locale: Locale) => request<CommitSettingsView>("/settings/commit", { headers: { "accept-language": locale } }),
   setCommitSettings: (settings: CommitSettings) => request<CommitSettingsView>("/settings/commit", { method: "PUT", body: JSON.stringify(settings) }),
+  pricingSettings: () => request<TokenPricingSettings>("/settings/pricing"),
+  setPricingSettings: (settings: TokenPricingSettings) => request<TokenPricingSettings>("/settings/pricing", { method: "PUT", body: JSON.stringify(settings) }),
 };
